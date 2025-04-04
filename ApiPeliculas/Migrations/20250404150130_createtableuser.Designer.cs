@@ -13,7 +13,7 @@ namespace ApiPeliculas.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20250404150130_createtableuser")]
-    partial class createtableuser
+    partial class Createtableuser
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

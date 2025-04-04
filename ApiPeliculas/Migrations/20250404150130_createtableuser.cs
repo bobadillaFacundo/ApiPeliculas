@@ -5,7 +5,7 @@
 namespace ApiPeliculas.Migrations
 {
     /// <inheritdoc />
-    public partial class createtableuser : Migration
+    public partial class Createtableuser : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

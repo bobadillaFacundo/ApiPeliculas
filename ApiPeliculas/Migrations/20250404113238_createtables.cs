@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ApiPeliculas.Migrations
 {
     /// <inheritdoc />
-    public partial class createtables : Migration
+    public partial class Createtables : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
