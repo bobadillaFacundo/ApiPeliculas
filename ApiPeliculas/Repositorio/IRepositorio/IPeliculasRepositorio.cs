@@ -2,7 +2,8 @@
 
 namespace ApiPeliculas.Repositorio.IRepositorio
 {
-    public interface IPeliculasRepositorio
+    public interface 
+        IPeliculasRepositorio
 
 
     {

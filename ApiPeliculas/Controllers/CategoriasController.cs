@@ -1,10 +1,7 @@
-﻿using API_Peliculas.Model;
-using API_Peliculas.Model.Dtos;
-using ApiPeliculas.Modelos;
+﻿using ApiPeliculas.Modelos;
 using ApiPeliculas.Modelos.Dtos;
 using ApiPeliculas.Repositorio.IRepositorio;
 using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API_Peliculas.Controllers
@@ -78,7 +75,7 @@ namespace API_Peliculas.Controllers
                     return StatusCode(StatusCodes.Status404NotFound, ModelState);
                 }
 
-                var categoria = _mapper.Map<Categoria>(crearCatgeoriaDto);
+                var categoria = _mapper.Map<Categorias>(crearCatgeoriaDto);
 
                 if (!_categoriaRepositorio.CrearCategoria(categoria))
                 {
@@ -113,7 +110,7 @@ namespace API_Peliculas.Controllers
             {
                 return NotFound($"La categoria con id {categoriaId} no existe");
             }
-            var itemCategoria = _mapper.Map<Categoria>(CatgeoriaDto);
+            var itemCategoria = _mapper.Map<Categorias>(CatgeoriaDto);
 
             if (!_categoriaRepositorio.ActualizarCategoria(itemCategoria))
             {
@@ -143,7 +140,7 @@ namespace API_Peliculas.Controllers
             }
 
 
-            var itemCategoria = _mapper.Map<Categoria>(CatgeoriaDto);
+            var itemCategoria = _mapper.Map<Categorias>(CatgeoriaDto);
 
             if (!_categoriaRepositorio.ActualizarCategoria(itemCategoria))
             {

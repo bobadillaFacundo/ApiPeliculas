@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using ApiPeliculas.Modelos;
 
@@ -26,7 +27,7 @@ namespace API_Peliculas.Model
         public int CategoriaId { get; set; }
         [ForeignKey("CategoriaId")]
 
-        public Categoria Categoria { get; set; }
+        public Categorias Categoria { get; set; }
 
 
     }

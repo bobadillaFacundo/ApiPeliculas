@@ -13,20 +13,28 @@ namespace ApiPeliculas.Repositorio
             _bd = bd;
         }
 
-        public bool ActualizarCategoria(Categoria categoria)
+        public bool ActualizarCategoria(Categorias categoria)
         {
-           categoria.FechaCreacion = DateTime.Now;
-            _bd.Categoria.Update(categoria);
+            categoria.FechaCreacion = DateTime.Now;
+            var categoriaDb = _bd.Categoria.Find(categoria.Id);
+            if (categoriaDb != null)
+            {
+                _bd.Entry(categoriaDb).CurrentValues.SetValues(categoria);
+            }
+            else
+            {
+                _bd.Update(categoria);
+            }
             return Guardar();
         }
 
-        public bool BorrarCategoria(Categoria categoria)
+        public bool BorrarCategoria(Categorias categoria)
         {
             _bd.Categoria.Remove(categoria);
             return Guardar();
         }
 
-        public bool CrearCategoria(Categoria categoria)
+        public bool CrearCategoria(Categorias categoria)
         {
             categoria.FechaCreacion = DateTime.Now;
             _bd.Categoria.Add(categoria);
@@ -44,12 +52,12 @@ namespace ApiPeliculas.Repositorio
             return valor;
         }
 
-        public Categoria GetCategoria(int CategoriaId)
+        public Categorias GetCategoria(int CategoriaId)
         {
             return _bd.Categoria.Find(CategoriaId);
         }
 
-        public ICollection<Categoria> GetCategorias()
+        public ICollection<Categorias> GetCategorias()
         {
             return _bd.Categoria.OrderBy(c => c.Nombre).ToList();
         }

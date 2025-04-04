@@ -4,14 +4,14 @@ namespace ApiPeliculas.Repositorio.IRepositorio
 {
     public interface ICategoriaRepositorio
     {
-        ICollection<Categoria> GetCategorias();
-        Categoria GetCategoria(int CategoriaId);
+        ICollection<Categorias> GetCategorias();
+        Categorias GetCategoria(int CategoriaId);
         bool ExisteCategoria(int id);
         bool ExisteCategoria(string nombre);
 
-        bool CrearCategoria(Categoria categoria);
-        bool ActualizarCategoria(Categoria categoria);
-        bool BorrarCategoria(Categoria categoria);
+        bool CrearCategoria(Categorias categoria);
+        bool ActualizarCategoria(Categorias categoria);
+        bool BorrarCategoria(Categorias categoria);
         bool Guardar();
     }
 }

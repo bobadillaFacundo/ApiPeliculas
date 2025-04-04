@@ -4,7 +4,7 @@ namespace API_Peliculas.Model.Dtos
 {
     public class DtoPelicula
     {
-        public string ID { get; set; }
+        public int ID { get; set; }
 
         public string Nombre { get; set; }
 

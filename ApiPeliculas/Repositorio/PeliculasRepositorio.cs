@@ -5,6 +5,10 @@ using ApiPeliculas.Data;
 using ApiPeliculas.Repositorio.IRepositorio;
 using Microsoft.EntityFrameworkCore;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.OpenApi;
+using ApiPeliculas.Modelos;
+using Microsoft.AspNetCore.Mvc;
 
 namespace API_Peliculas.Repository
 {
@@ -24,7 +28,14 @@ namespace API_Peliculas.Repository
             var PeliculasDb = _db.Pelicula.Find(Peliculas.ID);
             if (PeliculasDb != null)
             {
-                _db.Entry(PeliculasDb).CurrentValues.SetValues(Peliculas);
+                var idCategoria_id = _db.Categoria.Find(Peliculas.CategoriaId);
+                if(idCategoria_id != null)
+                {
+                    _db.Entry(PeliculasDb).CurrentValues.SetValues(Peliculas);
+                }else
+                {
+                    return false;
+                }
             }
             else
             {
@@ -80,8 +91,11 @@ namespace API_Peliculas.Repository
 
         ICollection<Peliculas> IPeliculasRepositorio.GetPeliculasPorCategorias(int categoriaID)
         {
-              return _db.Pelicula.Include(c => c.Categoria).Where(c => c.CategoriaId == categoriaID).ToList();
+             
+            if (categoriaID == 0) return _db.Pelicula.ToList();
 
+            IQueryable<Peliculas> peliculas = _db.Pelicula;
+                return peliculas.Where(c => c.CategoriaId == categoriaID).ToList();
         }
 
         IEnumerable<Peliculas> IPeliculasRepositorio.BuscarPelicula(string nombre)
@@ -95,5 +109,13 @@ namespace API_Peliculas.Repository
             return peliculas.ToList();
 
         }
+
+       
+    
+    
     }
+
+
+
+
 }
