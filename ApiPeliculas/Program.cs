@@ -40,10 +40,6 @@ builder.Services.AddCors(p => p.AddPolicy("PoliticaCors", build =>
 
 var key = builder.Configuration.GetValue<string>("AppiSettings:key");
 if (string.IsNullOrEmpty(key))
-{
-    throw new Exception("La clave JWT no fue encontrada en ApiSettings:key");
-}
-
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(x =>
  {
      x.RequireHttpsMetadata = false;
