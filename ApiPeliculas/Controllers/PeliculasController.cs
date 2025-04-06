@@ -139,6 +139,7 @@ namespace ApiPeliculas.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult EliminarPelicula(int id)
         {
             if (!_peliculasRepositorio.ExistePeliculas(id))

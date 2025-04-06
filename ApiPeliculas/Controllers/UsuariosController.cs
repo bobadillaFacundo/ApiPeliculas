@@ -18,7 +18,7 @@ namespace ApiPeliculas.Controllers
         public UsuariosController(IUserRepositorio userRepositorio, IMapper mapper)
         {
             _userRepositorio = userRepositorio;
-            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+            _mapper = mapper;
             this._respuestaApi = new ();
         }
 
@@ -90,7 +90,7 @@ namespace ApiPeliculas.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public  async Task<IActionResult> Login([FromBody] DtoLogin usuarioDto)
+        public async Task<IActionResult> Login([FromBody] DtoLogin usuarioDto)
         {
             
             var resultLogin = await _userRepositorio.Login(usuarioDto);

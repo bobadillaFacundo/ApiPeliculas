@@ -25,10 +25,6 @@ namespace ApiPeliculas.Repositorio
             return _db.Usuario.Where(c => c.Id == id).FirstOrDefault();
         }
 
-        public ICollection<Usuario> GetUsers()
-        {
-            return _db.Usuario.ToList();
-        }
 
         public bool IsUniqueUser(string username)
         {
@@ -49,7 +45,7 @@ namespace ApiPeliculas.Repositorio
                 return new DtoUserLoginRes() { User = null, Token = "" };
             }
             var manejotoken = new System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(clave);
+            byte[] key = Encoding.ASCII.GetBytes(clave);
             var tokenDescriptor = new Microsoft.IdentityModel.Tokens.SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new Claim[]
@@ -82,6 +78,15 @@ namespace ApiPeliculas.Repositorio
             return new DtoUserDate() { Username = usuario.User, Password = passwordEncriptado };
         }
 
+        Usuario IUserRepositorio.GetUser(int id)
+        {
+            return _db.Usuario.Where(c => c.Id == id).FirstOrDefault() ;
+        }
+
+        ICollection<Usuario> IUserRepositorio.GetUsers()
+        {
+            return _db.Usuario.ToList();
+        }
 
         private string obtenermd5(string password)
         {

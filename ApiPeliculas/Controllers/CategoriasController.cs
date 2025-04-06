@@ -2,10 +2,12 @@
 using ApiPeliculas.Modelos.Dtos;
 using ApiPeliculas.Repositorio.IRepositorio;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API_Peliculas.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CategoriasController : ControllerBase
@@ -21,6 +23,7 @@ namespace API_Peliculas.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public IActionResult GetCategorias()
         {
             var listaCategorias = _categoriaRepositorio.GetCategorias();
@@ -37,6 +40,7 @@ namespace API_Peliculas.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public IActionResult GetCategoria(int categoriaId)
         {
             var itemCategoria = _categoriaRepositorio.GetCategoria(categoriaId);
@@ -95,6 +99,7 @@ namespace API_Peliculas.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public IActionResult CambiarNombrePatch(int categoriaId, [FromBody] CategoriaDto CatgeoriaDto)
         {
             if (!ModelState.IsValid)
@@ -123,6 +128,7 @@ namespace API_Peliculas.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public IActionResult CambiarNombrePut(int categoriaId, [FromBody] CategoriaDto CatgeoriaDto)
         {
             if (!ModelState.IsValid)
@@ -154,6 +160,7 @@ namespace API_Peliculas.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public IActionResult EliminarCategoria(int categoriaId)
         {
             if (!_categoriaRepositorio.ExisteCategoria(categoriaId))
